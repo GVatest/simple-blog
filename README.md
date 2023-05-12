@@ -2,8 +2,6 @@
 
 > Blog template build with [Next JS](https://nextjs.org/) and [React](https://legacy.reactjs.org/)
 
-## Demo
-
 ## Start
 
 **_Clone_**
