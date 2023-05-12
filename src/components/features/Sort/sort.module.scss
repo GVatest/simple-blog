@@ -1,0 +1,31 @@
+.sort {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  width: fit-content;
+
+  padding: 1rem 1.5rem;
+  border: 2px solid;
+  border-radius: 32px;
+
+  cursor: pointer;
+  user-select: none;
+  transition: transform linear 0.15s;
+
+  .name {
+    font-family: "Patrick Hand", cursive;
+    font-size: 1.6rem;
+  }
+
+  .icon {
+    fill: var(--visible-primary);
+
+    &.ascend {
+      transform: rotate(180deg);
+    }
+  }
+
+  &:hover {
+    transform: scale(1.06);
+  }
+}

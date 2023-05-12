@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 3.5rem;
+  padding: 3rem 0;
+
+  .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    color: var(--visible-primary);
+
+    a {
+      transition: color linear 0.15s;
+    }
+
+    &:hover {
+      a {
+        color: #58a6ff;
+      }
+    }
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    column-gap: 3.5rem;
+  }
+
+  .theme {
+    fill: var(--visible-primary);
+    cursor: pointer;
+    transition: transform linear 0.15s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

@@ -1,0 +1,37 @@
+.dropzone {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2rem;
+  padding: 5rem;
+
+  border: 2px dashed var(--visible-secondary);
+  border-radius: 5px;
+}
+
+.dropzone__text {
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: var(--visible-secondary);
+}
+
+.dropzone__btn {
+  border: 2px dashed var(--visible-primary);
+  border-radius: 1rem;
+  font-size: 1.8rem;
+}
+
+.dropzone__files {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #000000;
+  position: absolute;
+  bottom: 10px;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

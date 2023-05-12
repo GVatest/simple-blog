@@ -1,0 +1,37 @@
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2rem;
+
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+      max-width: 350px;
+    }
+
+    &_element {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1rem;
+
+      @media only screen and (max-width: 600px) {
+        width: 100%;
+      }
+    }
+
+    .label {
+      font-size: 1.8rem;
+    }
+
+    .error {
+      color: #58a6ff;
+      font-size: 1.6rem;
+    }
+  }
+}

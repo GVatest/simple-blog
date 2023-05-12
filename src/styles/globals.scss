@@ -1,0 +1,55 @@
+@import "reset";
+@import "fonts";
+
+:root {
+  --background-page: #fff;
+  --visible-primary: #000;
+  --visible-secondary: #4e4e4e;
+}
+
+html[data-theme="dark"] {
+  --background-page: #000;
+  --visible-primary: #fff;
+  --visible-secondary: #e6e6e6;
+}
+
+html {
+  font-size: 62.5%;
+
+  @media only screen and (max-width: 600px) {
+    font-size: 52.5%;
+  }
+}
+
+body {
+  background: var(--background-page);
+  color: var(--visible-primary);
+}
+
+::selection {
+  background: #96cffe;
+}
+::-moz-selection {
+  background: #96cffe;
+}
+
+h1 {
+  font-family: "Patrick Hand", cursive;
+  font-size: 4rem;
+}
+
+h2 {
+  font-family: "Patrick Hand", cursive;
+  font-size: 3.4rem;
+}
+
+h3 {
+  font-size: 1.8rem;
+}
+
+// &:hover {
+//   h2 {
+//     transition: color linear 0.15s;
+//     color: #58a6ff;
+//   }
+// }

@@ -1,0 +1,9 @@
+.delete {
+  fill: var(--visible-primary);
+  cursor: pointer;
+  transition: transform linear 0.15s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}

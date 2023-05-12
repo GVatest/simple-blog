@@ -1,0 +1,44 @@
+{
+  "name": "simple-blog",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "prisma generate && prisma migrate deploy && node createsuperuser.js --username <username> --password <password> && next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.13.0",
+    "@types/formidable": "^2.0.5",
+    "@types/node": "18.16.3",
+    "@types/react": "18.2.5",
+    "@types/react-dom": "18.2.3",
+    "argon2": "^0.30.3",
+    "axios": "^1.4.0",
+    "eslint": "8.39.0",
+    "eslint-config-next": "13.3.4",
+    "formidable": "^2.1.1",
+    "formik": "^2.2.9",
+    "github-markdown-css": "^5.2.0",
+    "next": "13.3.4",
+    "next-auth": "^4.22.1",
+    "next-superjson-plugin": "^0.5.7",
+    "next-themes": "^0.2.1",
+    "octokit": "^2.0.14",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
+    "sass": "^1.62.1",
+    "slugify": "^1.6.6",
+    "superjson": "^1.12.3",
+    "typescript": "5.0.4",
+    "yargs": "^17.7.2",
+    "zod": "^3.21.4",
+    "zod-formik-adapter": "^1.2.0"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^8.0.1",
+    "prisma": "^4.13.0"
+  }
+}
