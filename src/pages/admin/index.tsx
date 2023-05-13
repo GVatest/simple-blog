@@ -54,10 +54,8 @@ export default function Admin({ initialPosts }: AdminProps) {
       case 201:
         setOnAdd(false);
         setSortedPosts((prev) => [data as IPost, ...prev]);
-      case 409:
-        throw new Error(data as string);
       default:
-        throw new Error(statusText);
+        throw new Error(data as string);
     }
   }
 

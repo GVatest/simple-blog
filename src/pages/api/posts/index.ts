@@ -5,7 +5,7 @@ import { getToken } from "next-auth/jwt";
 import { SPost } from "schemas";
 import slugify from "slugify";
 import { POSTS_UPLOAD_DIR } from "constants/locales";
-import { deleteFile, renameFile, parseForm } from "lib/server";
+import { deleteFile, renameFile, parseForm, findFile } from "lib/server";
 
 export default async function handle(
   req: NextApiRequest,
@@ -23,8 +23,14 @@ export default async function handle(
       const token = await getToken({ req });
       if (token) {
         try {
-          const [fields, file] = await parseForm(req, POSTS_UPLOAD_DIR);
+          let [fields, file] = await parseForm(req, POSTS_UPLOAD_DIR);
           if (!file) return res.status(400).send("File required");
+          // ! formidable bug saving file on first request
+          // TODO: rewrite using another lib
+          if (!findFile(POSTS_UPLOAD_DIR, file.newFilename)) return res.status(400).send("Failed to save file, try again");
+
+          console.log(findFile(POSTS_UPLOAD_DIR, file!.newFilename))
+          if (!file) return res.status(400).send("Failed to save file, try again");
 
           const validation = SPost.safeParse(fields);
 
