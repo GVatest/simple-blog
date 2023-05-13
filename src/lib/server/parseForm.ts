@@ -37,9 +37,6 @@ export function parseForm(req: IncomingMessage, to: string, fileName?: string) {
   if (fileName) {
     options.filename = (name, ext, part) =>
       fileName + "." + part.originalFilename?.split(".").pop();
-  } else {
-    options.filename = (name, ext, part) =>
-      name + Math.random().toString().replace(".", "_");
   }
 
   fs.readdir(uploadPath, (err) => {
