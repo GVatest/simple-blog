@@ -1,5 +1,8 @@
 .layout {
+  position: relative;
+
   max-width: 1120px;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 0 2rem;
 }

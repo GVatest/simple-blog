@@ -3,11 +3,11 @@ import { useState } from "react";
 import { Layout, Header, Search, PostsList, Sort } from "components";
 import { IPost } from "models";
 import { GetServerSideProps } from "next";
-import { postsClient } from "services";
 import classes from "./home.module.scss";
 import { sortByDate } from "lib/client";
 import { useWindowSize } from "utils";
 import { prisma } from "common/server";
+import { Footer } from "components";
 
 type HomeProps = {
   initialPosts: IPost[];
@@ -56,6 +56,7 @@ export default function Home({ initialPosts }: HomeProps) {
 
           <PostsList posts={sortedPosts} loading={searching} />
         </main>
+        <Footer />
       </Layout>
     </>
   );
