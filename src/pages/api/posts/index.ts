@@ -5,13 +5,14 @@ import { getToken } from "next-auth/jwt";
 import { SPost } from "schemas";
 import slugify from "slugify";
 import { POSTS_UPLOAD_DIR } from "constants/locales";
-import { deleteFile, renameFile, parseForm, findFile } from "lib/server";
+import { deleteFile, renameFile, parseForm } from "lib/server";
 
 export default async function handle(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   switch (req.method) {
+    // get all posts
     case "GET":
       try {
         const data = await prisma.post.findMany();
@@ -19,21 +20,28 @@ export default async function handle(
       } catch {
         return res.status(500).send("Failed to load posts");
       }
+    // add next post
     case "POST":
+      // check auth
       const token = await getToken({ req });
       if (token) {
         try {
+          // parse form data and save file if exists
           let [fields, file] = await parseForm(req, POSTS_UPLOAD_DIR);
+          // check if file exists
           if (!file) return res.status(400).send("File required");
 
+          // validate text fields
           const validation = SPost.safeParse(fields);
 
           if (!validation.success) {
             return res.status(400).json(validation.error.issues);
           }
 
+          // generate slug for post
           const slug = slugify(validation.data.title, { lower: true });
 
+          // try to save new post in db
           try {
             const post = await prisma.post
               .create({
@@ -43,11 +51,11 @@ export default async function handle(
                 },
               })
               .then((post) => {
-                renameFile(file, slug);
+                renameFile(file!, slug);
                 return post;
               })
               .catch((e) => {
-                deleteFile(file);
+                deleteFile(file!);
                 throw e;
               });
 
@@ -55,6 +63,7 @@ export default async function handle(
           } catch (e) {
             if (e instanceof PrismaClientKnownRequestError) {
               switch (e.code) {
+                // check if same post already exists
                 case "P2002":
                   return res
                     .status(409)

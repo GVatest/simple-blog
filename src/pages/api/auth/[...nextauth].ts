@@ -23,8 +23,8 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
+        // validate credentials
         const validation = SCredentials.safeParse(credentials);
-
         if (!validation.success) {
           throw new Error("Invalid credentials provided");
         }
@@ -34,16 +34,16 @@ export default NextAuth({
           password: string;
         };
 
+        // check if user exists
         const user = await prisma.user.findFirst({
           where: { username },
         });
-
         if (!user) {
           throw new Error("Wrong credentials. Try again.");
         }
 
+        // verify password
         const isValid = await verify(user.password, password);
-
         if (!isValid) {
           throw new Error("Wrong credentials. Try again.");
         }

@@ -1,4 +1,3 @@
-import { IPost } from "models";
 import { object, string } from "zod";
 
 export const SCredentials = object({

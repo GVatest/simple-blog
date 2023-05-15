@@ -3,10 +3,11 @@ import fs from "fs";
 import path from "path";
 
 export function renameFile(file: formidable.File | string, name: string) {
+  const filePath = typeof file !== "string" ? file.filepath : file;
   fs.renameSync(
-    typeof file !== "string" ? file.filepath : file,
+    filePath,
     path.join(
-      path.dirname(typeof file !== "string" ? file.filepath : file),
+      path.dirname(filePath),
       name +
         "." +
         (typeof file !== "string"

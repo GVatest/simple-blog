@@ -5,6 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // search posts by query
   if (req.method === "GET") {
     try {
       const { q: query } = req.query;
@@ -13,6 +14,7 @@ export default async function handler(
         throw new Error("Invalid request");
       }
 
+      // find all posts by query in db
       const posts = await prisma.post.findMany({
         where: {
           OR: [
@@ -31,7 +33,7 @@ export default async function handler(
       });
 
       res.status(200).json(posts);
-    } catch (error: any) {
+    } catch (error) {
       console.log(error);
       res.status(500).end();
     }
