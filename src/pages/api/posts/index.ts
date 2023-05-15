@@ -25,12 +25,6 @@ export default async function handle(
         try {
           let [fields, file] = await parseForm(req, POSTS_UPLOAD_DIR);
           if (!file) return res.status(400).send("File required");
-          // ! formidable bug saving file on first request
-          // TODO: rewrite using another lib
-          if (!findFile(POSTS_UPLOAD_DIR, file.newFilename)) return res.status(400).send("Failed to save file, try again");
-
-          console.log(findFile(POSTS_UPLOAD_DIR, file!.newFilename))
-          if (!file) return res.status(400).send("Failed to save file, try again");
 
           const validation = SPost.safeParse(fields);
 
@@ -51,7 +45,7 @@ export default async function handle(
               .then((post) => {
                 renameFile(file, slug);
                 return post;
-              }) 
+              })
               .catch((e) => {
                 deleteFile(file);
                 throw e;
@@ -67,12 +61,10 @@ export default async function handle(
                     .send("Post with the same title already exists");
               }
             } else {
-              console.log(e)
               return res.status(500).send("Failed to create new post");
             }
           }
         } catch (e) {
-          res.status(500);
           return res.status(500).send("Failed to create new post");
         }
       } else {

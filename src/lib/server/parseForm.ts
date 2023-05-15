@@ -4,7 +4,7 @@ import formidable from "formidable";
 import { IncomingMessage } from "http";
 import { VALID_FILE_FORMATS } from "constants/locales";
 import { deleteFile } from "./file/delete";
-import { couldStartTrivia } from "typescript";
+
 
 function validateFile(file: formidable.File | formidable.File[]) {
   if (!file) return undefined;
@@ -39,14 +39,12 @@ export function parseForm(req: IncomingMessage, to: string, fileName?: string) {
       fileName + "." + part.originalFilename?.split(".").pop();
   }
 
-  fs.readdir(uploadPath, (err) => {
-    if (!err) return;
-    fs.mkdir(uploadPath, (err) => {
-      if (err) throw err;
-    });
-  });
-
-
+  try {
+    fs.readdirSync(uploadPath);
+  } catch (e) {
+    console.log(e);
+    fs.mkdirSync(uploadPath);
+  }
 
   const form = formidable(options);
 
